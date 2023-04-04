@@ -17,17 +17,18 @@ class HouseModel {
   final String createdDate;
 
   HouseModel(
-      this.id,
-      this.image,
-      this.price,
-      this.bedrooms,
-      this.size,
-      this.description,
-      this.zip,
-      this.city,
-      this.latitude,
-      this.longitude,
-      this.createdDate);
+    this.id,
+    this.image,
+    this.price,
+    this.bedrooms,
+    this.size,
+    this.description,
+    this.zip,
+    this.city,
+    this.latitude,
+    this.longitude,
+    this.createdDate,
+  );
 
   factory HouseModel.fromJson(Map<String, dynamic> json) =>
       _$HouseModelFromJson(json);
