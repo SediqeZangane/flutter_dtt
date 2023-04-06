@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dtt/detail/peresentation/detail_screen.dart';
 import 'package:flutter_dtt/home/application/home_bloc.dart';
 import 'package:flutter_dtt/home/application/home_event.dart';
 import 'package:flutter_dtt/home/presentation/home_screen.dart';

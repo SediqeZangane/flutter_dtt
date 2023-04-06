@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_dtt/core/constants.dart';
+import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
+import 'package:flutter_dtt/home/domain/model/house_model.dart';
 
 class HomeRowCard extends StatelessWidget {
-  const HomeRowCard({super.key});
+final  HouseModel houseModel;
+
+  const HomeRowCard({super.key, required this.houseModel});
 
   @override
   Widget build(BuildContext context) {
@@ -12,37 +16,30 @@ class HomeRowCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Container(
-              height: 70,
-              width: 70,
+              height: 100,
+              width: 100,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                    image: AssetImage(
-                  'assets/splashSq.jpg',
-                )),
+                borderRadius: BorderRadius.circular(35),
+                image: DecorationImage(
+                  image: NetworkImage(Constants.baseUrl + houseModel.image),
+                ),
               ),
             ),
-
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 18.0,left: 8),
+              padding: const EdgeInsets.only(top: 18.0, left: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text("\$450000",style: Theme.of(context).textTheme.titleMedium),
-                   Text('emmasingel31',style: Theme.of(context).textTheme.bodyLarge),
+                  Text("\$${houseModel.price}",
+                      style: Theme.of(context).textTheme.titleMedium),
+                  Text(houseModel.zip,
+                      style: Theme.of(context).textTheme.bodyLarge),
                   Padding(
-                    padding: const EdgeInsets.only(top: 18.0,bottom: 18,right: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _buildCardDetail(bedIcon,'1'),
-                        _buildCardDetail(bathIcon,'2'),
-                        _buildCardDetail(layersIcon,'45'),
-                        _buildCardDetail(locationIcon,'56.9km'),
-                      ],
-                    ),
+                    padding:
+                        const EdgeInsets.only(top: 18.0, bottom: 18, right: 12),
+                    child: CardDetailsWidget(houseModel: houseModel)
                   ),
                 ],
               ),
@@ -53,20 +50,6 @@ class HomeRowCard extends StatelessWidget {
     );
   }
 
-  Widget _buildCardDetail(String svg,String text){
-    return Row(children: [
-      SvgPicture.asset(
-        svg,
-      ),
-      Padding(
-        padding:  const EdgeInsets.only(left: 6.0),
-        child: Text(text),
-      ),
-    ]);
-  }
+ 
 }
 
-const String bathIcon = 'assets/icons/ic_bath.svg';
-const String bedIcon = 'assets/icons/ic_bed.svg';
-const String layersIcon = 'assets/icons/ic_layers.svg';
-const String locationIcon = 'assets/icons/ic_location.svg';

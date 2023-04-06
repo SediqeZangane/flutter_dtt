@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dtt/detail/presentation/detail_screen.dart';
 import 'package:flutter_dtt/home/application/home_bloc.dart';
+import 'package:flutter_dtt/home/application/home_event.dart';
 import 'package:flutter_dtt/home/application/home_state.dart';
+import 'package:flutter_dtt/home/domain/model/house_model.dart';
 import 'package:flutter_dtt/home/presentation/widget/home_empty_list.dart';
 import 'package:flutter_dtt/home/presentation/widget/home_row_card.dart';
 
@@ -38,8 +41,15 @@ class HomeScreen extends StatelessWidget {
                       borderSide: BorderSide.none,
                     ),
                   ),
+                  onChanged: (String searchText) =>
+                      context.read<HomeBloc>().add(SearchHomeEvent(searchText)),
                 ),
-                Expanded(child: state.isLoad ? _buildLoading() : _buildList()),
+                Expanded(
+                    child: state.isLoad
+                        ? _buildLoading()
+                        : state.listHouse.isEmpty
+                            ? _buildEmpty()
+                            : _buildList(state.listHouse)),
               ],
             ),
           ),
@@ -48,17 +58,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoading(){
+  Widget _buildLoading() {
     return const Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildList() {
-    return ListView(children: const [
-      HomeRowCard(),
-      HomeRowCard(),
-      HomeRowCard(),
-      HomeRowCard(),
-    ]);
+  Widget _buildList(List<HouseModel> listHouse) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return InkWell(
+          child: HomeRowCard(houseModel: listHouse[index]),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return DetailScreen(houseModel: listHouse[index]);
+              },
+            ));
+          },
+        );
+      },
+      itemCount: listHouse.length,
+    );
   }
 
   Widget _buildEmpty() {
