@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:intl/intl.dart';
 
 class HomeRowCard extends StatelessWidget {
 final  HouseModel houseModel;
 
-  const HomeRowCard({super.key, required this.houseModel});
+   HomeRowCard({super.key, required this.houseModel});
 
-  @override
+
+
+@override
   Widget build(BuildContext context) {
+  NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
+  var formatPrice=myFormat.format(houseModel.price);
     return Card(
       child: Row(
         children: [
@@ -32,7 +37,7 @@ final  HouseModel houseModel;
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("\$${houseModel.price}",
+                  Text("\$$formatPrice",
                       style: Theme.of(context).textTheme.titleMedium),
                   Text(houseModel.zip,
                       style: Theme.of(context).textTheme.bodyLarge),
@@ -50,6 +55,7 @@ final  HouseModel houseModel;
     );
   }
 
- 
 }
+
+
 

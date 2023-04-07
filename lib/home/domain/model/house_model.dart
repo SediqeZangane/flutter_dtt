@@ -6,10 +6,10 @@ part 'house_model.g.dart';
 class HouseModel {
   final int id;
   final String image;
-  final double price;
+  final int price;
   final int bedrooms;
   final int bathrooms;
-  final double size;
+  final int size;
   final String description;
   final String zip;
   final String city;

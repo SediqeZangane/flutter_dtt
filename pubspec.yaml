@@ -39,6 +39,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   json_annotation: ^4.8.0
   dio: ^5.1.1
+  intl: ^0.18.0
 
 
 
@@ -86,6 +87,9 @@ flutter:
       - assets/icons/ic_bed.svg
       - assets/icons/ic_layers.svg
       - assets/icons/ic_location.svg
+      - assets/icons/ic_home.svg
+      - assets/icons/ic_info.svg
+      - assets/dtt_banner.png
 
   fonts:
     - family: GothamSSm

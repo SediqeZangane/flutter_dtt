@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dtt/home/application/home_bloc.dart';
 import 'package:flutter_dtt/home/application/home_event.dart';
 import 'package:flutter_dtt/home/presentation/home_screen.dart';
+import 'package:flutter_dtt/information/presentation/information_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -69,12 +70,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: BlocProvider<HomeBloc>(
-        child: const HomeScreen(),
-        create: (BuildContext context) {
-          return HomeBloc()..add(LoadHomeEvent());
-        },
-      ),
+      // home: BlocProvider<HomeBloc>(
+      //   child: const HomeScreen(),
+      //   create: (BuildContext context) {
+      //     return HomeBloc()..add(LoadHomeEvent());
+      //   },
+      // ),
+      home: InformationScreen(),
     );
   }
 }

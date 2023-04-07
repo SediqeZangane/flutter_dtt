@@ -7,6 +7,7 @@ import 'package:flutter_dtt/home/application/home_state.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
 import 'package:flutter_dtt/home/presentation/widget/home_empty_list.dart';
 import 'package:flutter_dtt/home/presentation/widget/home_row_card.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,20 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/ic_home.svg'),
+                label: 'home',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/ic_info.svg'),
+                label: 'about',
+              ),
+            ],
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+          ),
           backgroundColor: Theme.of(context).colorScheme.background,
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
