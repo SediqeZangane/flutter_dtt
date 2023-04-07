@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class HomeRowCard extends StatelessWidget {
 final  HouseModel houseModel;
 
-   HomeRowCard({super.key, required this.houseModel});
+   const HomeRowCard({super.key, required this.houseModel});
 
 
 
