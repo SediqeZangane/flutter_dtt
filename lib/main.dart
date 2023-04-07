@@ -70,13 +70,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: BlocProvider<HomeBloc>(
-      //   child: const HomeScreen(),
-      //   create: (BuildContext context) {
-      //     return HomeBloc()..add(LoadHomeEvent());
-      //   },
-      // ),
-      home: InformationScreen(),
+      home: BlocProvider<HomeBloc>(
+        child:  const HomeScreen(),
+        create: (BuildContext context) {
+          return HomeBloc()..add(LoadHomeEvent());
+        },
+      ),
     );
   }
 }
