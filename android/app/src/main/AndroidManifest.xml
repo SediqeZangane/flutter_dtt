@@ -6,8 +6,8 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-       <meta-data android:name="com.google.android.geo.AIzaSyAXsC40lDV5ZSsA1PHgo43wpm9f4CEn4b8"
-           android:value="MAP API KEY"/>
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBPLqiOT6TA6m6Y-djcfC0rjH8xSqgy0vQ"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -16,6 +16,7 @@ class HouseModel {
   final double latitude;
   final double longitude;
   final String createdDate;
+  double distance=0;
 
   HouseModel(
     this.id,

@@ -2,11 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final HouseModel houseModel;
 
   const DetailScreen({super.key, required this.houseModel});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  Set<Marker> markers = {};
+  late LatLng showLocation;
+
+  @override
+  void initState() {
+    showLocation =
+        LatLng(widget.houseModel.latitude, widget.houseModel.longitude);
+    markers.add(Marker(
+        markerId: MarkerId(showLocation.toString()),
+        position: showLocation,
+        infoWindow: const InfoWindow(title: 'house address'),
+        icon: BitmapDescriptor.defaultMarker));
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +42,8 @@ class DetailScreen extends StatelessWidget {
         children: [
           Align(
               alignment: Alignment.topCenter,
-              child: Image.network(Constants.baseUrl + houseModel.image)),
+              child:
+                  Image.network(Constants.baseUrl + widget.houseModel.image)),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -43,13 +66,14 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text("\$${houseModel.price}",
+                        Text("\$${widget.houseModel.price}",
                             style: Theme.of(context).textTheme.titleMedium),
                         Expanded(
                           child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: CardDetailsWidget(houseModel: houseModel),
+                            child: CardDetailsWidget(
+                                houseModel: widget.houseModel),
                           ),
                         )
                       ],
@@ -63,7 +87,7 @@ class DetailScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          houseModel.description,
+                          widget.houseModel.description,
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],
@@ -76,10 +100,15 @@ class DetailScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 16),
-                        Container(
-                          color: Colors.green,
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          height: MediaQuery.of(context).size.height * 0.2,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.33,
+                          child: GoogleMap(
+                            zoomGesturesEnabled: true,
+                            initialCameraPosition:
+                                CameraPosition(target: showLocation, zoom: 13),
+                            markers: markers,
+                            mapType: MapType.normal,
+                          ),
                         ),
                       ],
                     )

@@ -4,7 +4,6 @@ import 'package:flutter_dtt/home/application/home_event.dart';
 import 'package:flutter_dtt/home/application/home_state.dart';
 import 'package:flutter_dtt/home/application/location_utils.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final DioClient dioClient = DioClient();
@@ -18,14 +17,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(state.copyWith(isLoad: true));
         listHouse = await dioClient.getHouse();
         final currentLocation = await locationUtils.determinePosition();
-        print(currentLocation.toString());
-        listHouse.map((e) {
+        listHouse=listHouse.map((e) {
           final distance = locationUtils.calculateDistance(
               LatLng(currentLocation.latitude, currentLocation.longitude),
               LatLng(e.latitude, e.longitude));
-
+          e.distance = distance;
           return e;
-        });
+        }).toList();
 
         emit(state.copyWith(isLoad: false, listHouse: listHouse));
       }

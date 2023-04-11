@@ -15,7 +15,7 @@ class CardDetailsWidget extends StatelessWidget {
         _buildCardDetail(bedIcon, '${houseModel.bedrooms}'),
         _buildCardDetail(bathIcon, '${houseModel.bathrooms}'),
         _buildCardDetail(layersIcon, '${houseModel.size}'),
-        _buildCardDetail(locationIcon, '${houseModel.bathrooms}'),
+        _buildCardDetail(locationIcon, (houseModel.distance/1000).toStringAsFixed(0)),
       ],
     );
   }
@@ -25,10 +25,7 @@ class CardDetailsWidget extends StatelessWidget {
       SvgPicture.asset(
         svg,
       ),
-      Padding(
-        padding: const EdgeInsets.only(left: 6.0),
-        child: Text(text),
-      ),
+      Text(text),
     ]);
   }
 }
