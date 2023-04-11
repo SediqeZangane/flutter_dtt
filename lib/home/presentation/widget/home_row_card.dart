@@ -24,7 +24,7 @@ final  HouseModel houseModel;
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(35),
+                borderRadius: BorderRadius.circular(24),
                 image: DecorationImage(
                   image: NetworkImage(Constants.baseUrl + houseModel.image),
                 ),

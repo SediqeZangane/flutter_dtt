@@ -11,8 +11,29 @@ import 'package:flutter_dtt/home/presentation/widget/home_row_card.dart';
 import 'package:flutter_dtt/information/presentation/information_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController.addListener(() {
+      context.read<HomeBloc>().add(SearchHomeEvent(textEditingController.text));
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    textEditingController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +49,25 @@ class HomeScreen extends StatelessWidget {
                 bottomNavigationBar: BottomNavigationBar(
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
-                      icon: SvgPicture.asset('assets/icons/ic_home.svg'),
-                      label: 'home',
-                    ),
+                        icon: SvgPicture.asset(
+                          'assets/icons/ic_home.svg',
+                          color: Theme.of(context).colorScheme.surfaceVariant,
+                        ),
+                        label: 'home',
+                        activeIcon: SvgPicture.asset(
+                          'assets/icons/ic_home.svg',
+                          color: Theme.of(context).colorScheme.onSurface,
+                        )),
                     BottomNavigationBarItem(
-                      icon: SvgPicture.asset('assets/icons/ic_info.svg'),
-                      label: 'about',
-                    ),
+                        icon: SvgPicture.asset(
+                          'assets/icons/ic_info.svg',
+                          color: Theme.of(context).colorScheme.surfaceVariant,
+                        ),
+                        label: 'about',
+                        activeIcon: SvgPicture.asset(
+                          'assets/icons/ic_info.svg',
+                          color: Theme.of(context).colorScheme.onSurface,
+                        )),
                   ],
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
@@ -70,9 +103,14 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 50),
             TextField(
               decoration: InputDecoration(
-                suffixIcon: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.surfaceTint,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    textEditingController.clear();
+                  },
+                  child: Icon(
+                    state.isSearching ? Icons.clear : Icons.search,
+                    color: Theme.of(context).colorScheme.surfaceTint,
+                  ),
                 ),
                 hintText: 'Search for a home',
                 hintStyle: Theme.of(context).textTheme.bodySmall,
@@ -83,8 +121,7 @@ class HomeScreen extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
-              onChanged: (String searchText) =>
-                  context.read<HomeBloc>().add(SearchHomeEvent(searchText)),
+              controller: textEditingController,
             ),
             Expanded(
                 child: state.isLoad
@@ -108,7 +145,6 @@ class HomeScreen extends StatelessWidget {
         return InkWell(
           child: HomeRowCard(houseModel: listHouse[index]),
           onTap: () {
-            // location.determinePosition();
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
                 return DetailScreen(houseModel: listHouse[index]);

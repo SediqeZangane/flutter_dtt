@@ -17,7 +17,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(state.copyWith(isLoad: true));
         listHouse = await dioClient.getHouse();
         final currentLocation = await locationUtils.determinePosition();
-        listHouse=listHouse.map((e) {
+        listHouse = listHouse.map((e) {
           final distance = locationUtils.calculateDistance(
               LatLng(currentLocation.latitude, currentLocation.longitude),
               LatLng(e.latitude, e.longitude));
@@ -32,7 +32,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final list = listHouse
             .where((element) => element.description.contains(event.searchText))
             .toList();
-        emit(state.copyWith(listHouse: list));
+        emit(state.copyWith(
+          listHouse: list,
+          isSearching: event.searchText.isNotEmpty,
+        ));
       }
     });
   }
