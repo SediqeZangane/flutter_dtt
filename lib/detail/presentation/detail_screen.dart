@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' hide MapType;
+import 'package:map_launcher/map_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
   final HouseModel houseModel;
@@ -21,11 +22,21 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     showLocation =
         LatLng(widget.houseModel.latitude, widget.houseModel.longitude);
-    markers.add(Marker(
+    markers.add(
+      Marker(
         markerId: MarkerId(showLocation.toString()),
         position: showLocation,
         infoWindow: const InfoWindow(title: 'house address'),
-        icon: BitmapDescriptor.defaultMarker));
+        icon: BitmapDescriptor.defaultMarker,
+        onTap: (){
+          MapLauncher.showDirections(
+            mapType: MapType.google,
+            destination: Coords(widget.houseModel.latitude,
+                widget.houseModel.longitude),
+          );
+        }
+      ),
+    );
 
     super.initState();
   }
@@ -107,7 +118,6 @@ class _DetailScreenState extends State<DetailScreen> {
                             initialCameraPosition:
                                 CameraPosition(target: showLocation, zoom: 13),
                             markers: markers,
-                            mapType: MapType.normal,
                           ),
                         ),
                       ],
