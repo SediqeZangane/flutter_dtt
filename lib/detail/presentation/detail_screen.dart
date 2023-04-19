@@ -24,18 +24,17 @@ class _DetailScreenState extends State<DetailScreen> {
         LatLng(widget.houseModel.latitude, widget.houseModel.longitude);
     markers.add(
       Marker(
-        markerId: MarkerId(showLocation.toString()),
-        position: showLocation,
-        infoWindow: const InfoWindow(title: 'house address'),
-        icon: BitmapDescriptor.defaultMarker,
-        onTap: (){
-          MapLauncher.showDirections(
-            mapType: MapType.google,
-            destination: Coords(widget.houseModel.latitude,
-                widget.houseModel.longitude),
-          );
-        }
-      ),
+          markerId: MarkerId(showLocation.toString()),
+          position: showLocation,
+          infoWindow: const InfoWindow(title: 'house address'),
+          icon: BitmapDescriptor.defaultMarker,
+          onTap: () {
+            MapLauncher.showDirections(
+              mapType: MapType.google,
+              destination: Coords(
+                  widget.houseModel.latitude, widget.houseModel.longitude),
+            );
+          }),
     );
 
     super.initState();
@@ -52,9 +51,13 @@ class _DetailScreenState extends State<DetailScreen> {
       body: Stack(
         children: [
           Align(
-              alignment: Alignment.topCenter,
-              child:
-                  Image.network(Constants.baseUrl + widget.houseModel.image)),
+            alignment: Alignment.topCenter,
+            child: Image.network(
+              Constants.baseUrl + widget.houseModel.image,
+              height: MediaQuery.of(context).size.height * 0.36,
+              fit: BoxFit.cover,
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -75,19 +78,22 @@ class _DetailScreenState extends State<DetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      children: [
-                        Text("\$${widget.houseModel.price}",
-                            style: Theme.of(context).textTheme.titleMedium),
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 32.0),
-                            child: CardDetailsWidget(
-                                houseModel: widget.houseModel),
-                          ),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Row(
+                        children: [
+                          Text("\$${widget.houseModel.price}",
+                              style: Theme.of(context).textTheme.titleMedium),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32.0),
+                              child: CardDetailsWidget(
+                                  houseModel: widget.houseModel),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,10 +102,13 @@ class _DetailScreenState extends State<DetailScreen> {
                           'Description',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 12),
                         Text(
                           widget.houseModel.description,
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(fontSize: 14,fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),
@@ -110,9 +119,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           'Location',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 10),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.33,
+                          height: MediaQuery.of(context).size.height * 0.32,
                           child: GoogleMap(
                             zoomGesturesEnabled: true,
                             initialCameraPosition:

@@ -113,13 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 hintText: 'Search for a home',
-                hintStyle: Theme.of(context).textTheme.bodySmall,
+                hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.surface,
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                   borderSide: BorderSide.none,
                 ),
+                isDense: true,                      // Added this
+                contentPadding: const EdgeInsets.all(8),
               ),
               controller: textEditingController,
             ),
@@ -140,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildList(List<HouseModel> listHouse) {
-    return ListView.builder(
+    return ListView.builder(padding: const EdgeInsets.only(top: 10,bottom: 0),
       itemBuilder: (context, index) {
         return InkWell(
           child: HomeRowCard(houseModel: listHouse[index]),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,20 +13,20 @@ class CardDetailsWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildCardDetail(bedIcon, '${houseModel.bedrooms}'),
-        _buildCardDetail(bathIcon, '${houseModel.bathrooms}'),
-        _buildCardDetail(layersIcon, '${houseModel.size}'),
-        _buildCardDetail(locationIcon, (houseModel.distance/1000).toStringAsFixed(0)),
+        _buildCardDetail(bedIcon, '${houseModel.bedrooms}',context),
+        _buildCardDetail(bathIcon, '${houseModel.bathrooms}',context),
+        _buildCardDetail(layersIcon, '${houseModel.size}',context),
+        _buildCardDetail(locationIcon, (houseModel.distance/1000).toStringAsFixed(0)+'  Km',context),
       ],
     );
   }
 
-  Widget _buildCardDetail(String svg, String text) {
+  Widget _buildCardDetail(String svg, String text,BuildContext context) {
     return Row(children: [
       SvgPicture.asset(
         svg,
       ),
-      Text(text),
+      Text(text,style:  Theme.of(context).textTheme.bodyMedium,),
     ]);
   }
 }

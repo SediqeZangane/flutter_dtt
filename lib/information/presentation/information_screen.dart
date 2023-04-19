@@ -40,12 +40,17 @@ class InformationScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
-                Image.asset(
-                  'assets/dtt_banner.png',
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  fit: BoxFit.contain,
-                  filterQuality: FilterQuality.high,
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/dtt_banner.png',
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      fit: BoxFit.contain,
+                      filterQuality: FilterQuality.high,
+                    ),
+                    Container(),
+                  ],
                 )
               ],
             )
