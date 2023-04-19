@@ -18,6 +18,7 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   Set<Marker> markers = {};
   late LatLng showLocation;
+  GoogleMapController? controller;
 
   @override
   void initState() {
@@ -127,6 +128,9 @@ class _DetailScreenState extends State<DetailScreen> {
                             initialCameraPosition:
                                 CameraPosition(target: showLocation, zoom: 13),
                             markers: markers,
+                            onMapCreated: (controller){
+                              this.controller = controller;
+                            },
                           ),
                         ),
                       ],
@@ -139,5 +143,11 @@ class _DetailScreenState extends State<DetailScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }

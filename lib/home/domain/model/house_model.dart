@@ -16,22 +16,24 @@ class HouseModel {
   final double latitude;
   final double longitude;
   final String createdDate;
-  double distance=0;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  double distance;
 
-  HouseModel(
-    this.id,
-    this.image,
-    this.price,
-    this.bedrooms,
-    this.bathrooms,
-    this.size,
-    this.description,
-    this.zip,
-    this.city,
-    this.latitude,
-    this.longitude,
-    this.createdDate,
-  );
+  HouseModel({
+    required this.id,
+    required this.image,
+    required this.price,
+    required this.bedrooms,
+    required this.bathrooms,
+    required this.size,
+    required this.description,
+    required this.zip,
+    required this.city,
+    required this.latitude,
+    required this.longitude,
+    required this.createdDate,
+    this.distance = 0,
+  });
 
   factory HouseModel.fromJson(Map<String, dynamic> json) =>
       _$HouseModelFromJson(json);
