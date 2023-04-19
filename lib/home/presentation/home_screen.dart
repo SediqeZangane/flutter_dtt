@@ -120,11 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                   borderSide: BorderSide.none,
                 ),
-                isDense: true,                      // Added this
+                isDense: true,
                 contentPadding: const EdgeInsets.all(8),
               ),
               controller: textEditingController,
             ),
+            const SizedBox(height: 4),
             Expanded(
                 child: state.isLoad
                     ? _buildLoading()

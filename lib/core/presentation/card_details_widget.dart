@@ -4,7 +4,7 @@ import 'package:flutter_dtt/home/domain/model/house_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CardDetailsWidget extends StatelessWidget {
- final HouseModel houseModel;
+  final HouseModel houseModel;
 
   const CardDetailsWidget({super.key, required this.houseModel});
 
@@ -13,20 +13,26 @@ class CardDetailsWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildCardDetail(bedIcon, '${houseModel.bedrooms}',context),
-        _buildCardDetail(bathIcon, '${houseModel.bathrooms}',context),
-        _buildCardDetail(layersIcon, '${houseModel.size}',context),
-        _buildCardDetail(locationIcon, (houseModel.distance/1000).toStringAsFixed(0)+'  Km',context),
+        _buildCardDetail(bedIcon, '${houseModel.bedrooms}', context),
+        _buildCardDetail(bathIcon, '${houseModel.bathrooms}', context),
+        _buildCardDetail(layersIcon, '${houseModel.size}', context),
+        _buildCardDetail(locationIcon,
+            (houseModel.distance / 1000).toStringAsFixed(0) + '  Km', context),
       ],
     );
   }
 
-  Widget _buildCardDetail(String svg, String text,BuildContext context) {
+  Widget _buildCardDetail(String svg, String text, BuildContext context) {
     return Row(children: [
       SvgPicture.asset(
         svg,
+        colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.surfaceTint, BlendMode.srcIn),
       ),
-      Text(text,style:  Theme.of(context).textTheme.bodyMedium,),
+      Text(
+        text,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
     ]);
   }
 }
