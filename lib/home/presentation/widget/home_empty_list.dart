@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dtt/core/utils/dimens.dart';
 
 class HomeEmptyList extends StatelessWidget {
   const HomeEmptyList({super.key});
@@ -9,7 +10,7 @@ class HomeEmptyList extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.all(28.0),
+          padding: const EdgeInsets.all(Dimens.largeX),
           child: Image.asset('assets/search_state_empty.png'),
         ),
         Text(

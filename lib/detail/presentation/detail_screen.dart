@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/core/presentation/price_widget.dart';
+import 'package:flutter_dtt/core/utils/dimens.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' hide MapType;
 import 'package:map_launcher/map_launcher.dart';
@@ -68,27 +69,27 @@ class _DetailScreenState extends State<DetailScreen> {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.background,
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(Dimens.largeXX),
+                  topRight: Radius.circular(Dimens.largeXX),
                 ),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
+                  horizontal: Dimens.large,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: Dimens.large),
                       child: Row(
                         children: [
                           PriceWidget(price: widget.houseModel.price),
                           Expanded(
                             child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 32.0),
+                                  const EdgeInsets.symmetric(horizontal: Dimens.largeXX),
                               child: CardDetailsWidget(
                                   houseModel: widget.houseModel),
                             ),
@@ -103,7 +104,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           'Description',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: Dimens.medium),
                         Text(
                           widget.houseModel.description,
                           style: Theme.of(context)
@@ -120,7 +121,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           'Location',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: Dimens.small),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.32,
                           child: GoogleMap(

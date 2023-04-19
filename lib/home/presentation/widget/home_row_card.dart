@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/core/presentation/price_widget.dart';
+import 'package:flutter_dtt/core/utils/dimens.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
 
 class HomeRowCard extends StatelessWidget {
@@ -12,11 +13,13 @@ class HomeRowCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Dimens.small),
+      ),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            padding: const EdgeInsets.symmetric(horizontal: Dimens.medium),
             child: Container(
               height: 70,
               width: 70,
@@ -31,7 +34,8 @@ class HomeRowCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 8),
+              padding: const EdgeInsets.only(
+                  top: Dimens.medium, left: Dimens.smallX),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -40,7 +44,10 @@ class HomeRowCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyLarge),
                   Padding(
                       padding: const EdgeInsets.only(
-                          top: 18.0, bottom: 18, right: 12),
+                        top: Dimens.medium,
+                        bottom: Dimens.medium,
+                        right: Dimens.small,
+                      ),
                       child: CardDetailsWidget(houseModel: houseModel)),
                 ],
               ),

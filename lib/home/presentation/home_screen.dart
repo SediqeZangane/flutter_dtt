@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dtt/core/utils/dimens.dart';
 import 'package:flutter_dtt/cubit/cubit_navigation_bar.dart';
 import 'package:flutter_dtt/detail/presentation/detail_screen.dart';
 import 'package:flutter_dtt/home/application/home_bloc.dart';
@@ -93,14 +94,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildHome(HomeState state) {
     return Builder(builder: (context) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimens.large,
+          vertical: Dimens.small,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: Dimens.homeRowSpace),
             Text('DTT REAL ESTATE',
                 style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 50),
+            const SizedBox(height: Dimens.homeRowSpace),
             TextField(
               decoration: InputDecoration(
                 suffixIcon: InkWell(
@@ -113,19 +117,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 hintText: 'Search for a home',
-                hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontWeight: FontWeight.w400),
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.surface,
                 border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(Dimens.small)),
                   borderSide: BorderSide.none,
                 ),
                 isDense: true,
-                contentPadding: const EdgeInsets.all(8),
+                contentPadding: const EdgeInsets.all(Dimens.smallX),
               ),
               controller: textEditingController,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: Dimens.smallXX),
             Expanded(
                 child: state.isLoad
                     ? _buildLoading()
@@ -143,7 +150,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildList(List<HouseModel> listHouse) {
-    return ListView.builder(padding: const EdgeInsets.only(top: 10,bottom: 0),
+    return ListView.builder(
+      padding: EdgeInsets.zero.copyWith(top: Dimens.smallX),
       itemBuilder: (context, index) {
         return InkWell(
           child: HomeRowCard(houseModel: listHouse[index]),
