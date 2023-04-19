@@ -3,12 +3,12 @@ import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/core/presentation/price_widget.dart';
 import 'package:flutter_dtt/core/utils/dimens.dart';
-import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:flutter_dtt/home/domain/model/house_info.dart';
 
 class HomeRowCard extends StatelessWidget {
-  final HouseModel houseModel;
+  final HouseInfo houseInfo;
 
-  const HomeRowCard({super.key, required this.houseModel});
+  const HomeRowCard({super.key, required this.houseInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class HomeRowCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 image: DecorationImage(
-                  image: NetworkImage(Constants.baseUrl + houseModel.image),
+                  image: NetworkImage(Constants.baseUrl + houseInfo.houseModel.image),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -39,8 +39,8 @@ class HomeRowCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  PriceWidget(price: houseModel.price),
-                  Text(houseModel.zip,
+                  PriceWidget(price: houseInfo.houseModel.price),
+                  Text(houseInfo.houseModel.zip,
                       style: Theme.of(context).textTheme.bodyLarge),
                   Padding(
                       padding: const EdgeInsets.only(
@@ -48,7 +48,7 @@ class HomeRowCard extends StatelessWidget {
                         bottom: Dimens.medium,
                         right: Dimens.small,
                       ),
-                      child: CardDetailsWidget(houseModel: houseModel)),
+                      child: CardDetailsWidget(houseInfo: houseInfo)),
                 ],
               ),
             ),

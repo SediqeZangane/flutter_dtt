@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:flutter_dtt/home/domain/model/house_info.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CardDetailsWidget extends StatelessWidget {
-  final HouseModel houseModel;
+  final HouseInfo houseInfo;
 
-  const CardDetailsWidget({super.key, required this.houseModel});
+  const CardDetailsWidget({
+    super.key,
+    required this.houseInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildCardDetail(bedIcon, '${houseModel.bedrooms}', context),
-        _buildCardDetail(bathIcon, '${houseModel.bathrooms}', context),
-        _buildCardDetail(layersIcon, '${houseModel.size}', context),
+        _buildCardDetail(bedIcon, '${houseInfo.houseModel.bedrooms}', context),
+        _buildCardDetail(
+            bathIcon, '${houseInfo.houseModel.bathrooms}', context),
+        _buildCardDetail(layersIcon, '${houseInfo.houseModel.size}', context),
         _buildCardDetail(locationIcon,
-            '${(houseModel.distance / 1000).toStringAsFixed(0)}  Km', context),
+            '${(houseInfo.distance / 1000).toStringAsFixed(0)}  Km', context),
       ],
     );
   }

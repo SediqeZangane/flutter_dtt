@@ -3,14 +3,14 @@ import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
 import 'package:flutter_dtt/core/presentation/price_widget.dart';
 import 'package:flutter_dtt/core/utils/dimens.dart';
-import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:flutter_dtt/home/domain/model/house_info.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' hide MapType;
 import 'package:map_launcher/map_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
-  final HouseModel houseModel;
+  final HouseInfo houseInfo;
 
-  const DetailScreen({super.key, required this.houseModel});
+  const DetailScreen({super.key, required this.houseInfo});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -23,8 +23,8 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   void initState() {
-    showLocation =
-        LatLng(widget.houseModel.latitude, widget.houseModel.longitude);
+    showLocation = LatLng(widget.houseInfo.houseModel.latitude,
+        widget.houseInfo.houseModel.longitude);
     markers.add(
       Marker(
           markerId: MarkerId(showLocation.toString()),
@@ -34,8 +34,8 @@ class _DetailScreenState extends State<DetailScreen> {
           onTap: () {
             MapLauncher.showDirections(
               mapType: MapType.google,
-              destination: Coords(
-                  widget.houseModel.latitude, widget.houseModel.longitude),
+              destination: Coords(widget.houseInfo.houseModel.latitude,
+                  widget.houseInfo.houseModel.longitude),
             );
           }),
     );
@@ -56,7 +56,7 @@ class _DetailScreenState extends State<DetailScreen> {
           Align(
             alignment: Alignment.topCenter,
             child: Image.network(
-              Constants.baseUrl + widget.houseModel.image,
+              Constants.baseUrl + widget.houseInfo.houseModel.image,
               height: MediaQuery.of(context).size.height * 0.36,
               fit: BoxFit.cover,
             ),
@@ -82,16 +82,17 @@ class _DetailScreenState extends State<DetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: Dimens.large),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: Dimens.large),
                       child: Row(
                         children: [
-                          PriceWidget(price: widget.houseModel.price),
+                          PriceWidget(price: widget.houseInfo.houseModel.price),
                           Expanded(
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: Dimens.largeXX),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: Dimens.largeXX),
                               child: CardDetailsWidget(
-                                  houseModel: widget.houseModel),
+                                  houseInfo: widget.houseInfo),
                             ),
                           )
                         ],
@@ -106,11 +107,12 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                         const SizedBox(height: Dimens.medium),
                         Text(
-                          widget.houseModel.description,
+                          widget.houseInfo.houseModel.description,
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
-                              .copyWith(fontSize: 14,fontWeight: FontWeight.w300),
+                              .copyWith(
+                                  fontSize: 14, fontWeight: FontWeight.w300),
                         ),
                       ],
                     ),
@@ -129,7 +131,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             initialCameraPosition:
                                 CameraPosition(target: showLocation, zoom: 13),
                             markers: markers,
-                            onMapCreated: (controller){
+                            onMapCreated: (controller) {
                               this.controller = controller;
                             },
                           ),

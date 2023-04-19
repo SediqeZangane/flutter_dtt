@@ -1,8 +1,8 @@
-import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:flutter_dtt/home/domain/model/house_info.dart';
 
 class HomeState {
   final bool isLoad;
-  final List<HouseModel> listHouse;
+  final List<HouseInfo> listHouse;
   final bool isSearching;
   final bool clearText;
 
@@ -19,11 +19,12 @@ class HomeState {
     required this.clearText,
   });
 
-  HomeState copyWith(
-          {bool? isLoad,
-          List<HouseModel>? listHouse,
-          bool? isSearching,
-          bool? clearText}) =>
+  HomeState copyWith({
+    bool? isLoad,
+    List<HouseInfo>? listHouse,
+    bool? isSearching,
+    bool? clearText,
+  }) =>
       HomeState(
         isLoad: isLoad ?? this.isLoad,
         listHouse: listHouse ?? this.listHouse,

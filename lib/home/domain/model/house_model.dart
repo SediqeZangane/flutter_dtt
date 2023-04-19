@@ -16,8 +16,6 @@ class HouseModel {
   final double latitude;
   final double longitude;
   final String createdDate;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  double distance;
 
   HouseModel({
     required this.id,
@@ -32,7 +30,6 @@ class HouseModel {
     required this.latitude,
     required this.longitude,
     required this.createdDate,
-    this.distance = 0,
   });
 
   factory HouseModel.fromJson(Map<String, dynamic> json) =>

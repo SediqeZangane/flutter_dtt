@@ -6,14 +6,14 @@ import 'package:flutter_dtt/detail/presentation/detail_screen.dart';
 import 'package:flutter_dtt/home/application/home_bloc.dart';
 import 'package:flutter_dtt/home/application/home_event.dart';
 import 'package:flutter_dtt/home/application/home_state.dart';
-import 'package:flutter_dtt/home/domain/model/house_model.dart';
+import 'package:flutter_dtt/home/domain/model/house_info.dart';
 import 'package:flutter_dtt/home/presentation/widget/home_empty_list.dart';
 import 'package:flutter_dtt/home/presentation/widget/home_row_card.dart';
 import 'package:flutter_dtt/information/presentation/information_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -52,22 +52,34 @@ class _HomeScreenState extends State<HomeScreen> {
                     BottomNavigationBarItem(
                         icon: SvgPicture.asset(
                           'assets/icons/ic_home.svg',
-                          color: Theme.of(context).colorScheme.surfaceVariant,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surfaceVariant,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         label: 'home',
                         activeIcon: SvgPicture.asset(
                           'assets/icons/ic_home.svg',
-                          color: Theme.of(context).colorScheme.onSurface,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.onSurface,
+                            BlendMode.srcIn,
+                          ),
                         )),
                     BottomNavigationBarItem(
                         icon: SvgPicture.asset(
                           'assets/icons/ic_info.svg',
-                          color: Theme.of(context).colorScheme.surfaceVariant,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surfaceVariant,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         label: 'about',
                         activeIcon: SvgPicture.asset(
                           'assets/icons/ic_info.svg',
-                          color: Theme.of(context).colorScheme.onSurface,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.onSurface,
+                            BlendMode.srcIn,
+                          ),
                         )),
                   ],
                   showSelectedLabels: false,
@@ -149,16 +161,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return const Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildList(List<HouseModel> listHouse) {
+  Widget _buildList(List<HouseInfo> listHouse) {
     return ListView.builder(
       padding: EdgeInsets.zero.copyWith(top: Dimens.smallX),
       itemBuilder: (context, index) {
         return InkWell(
-          child: HomeRowCard(houseModel: listHouse[index]),
+          child: HomeRowCard(houseInfo: listHouse[index]),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
-                return DetailScreen(houseModel: listHouse[index]);
+                return DetailScreen(houseInfo: listHouse[index]);
               },
             ));
           },

@@ -7,6 +7,7 @@ class Dimens {
   static const double largeX = 24;
   static const double largeXX = 32;
 
+  static const double infoBanner = 50;
   static const double homeRowSpace = 50;
   static const double cardImageSize = 70;
 }
