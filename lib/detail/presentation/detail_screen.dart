@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
+import 'package:flutter_dtt/core/presentation/price_widget.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' hide MapType;
 import 'package:map_launcher/map_launcher.dart';
@@ -82,8 +83,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 12.0),
                       child: Row(
                         children: [
-                          Text("\$${widget.houseModel.price}",
-                              style: Theme.of(context).textTheme.titleMedium),
+                          PriceWidget(price: widget.houseModel.price),
                           Expanded(
                             child: Padding(
                               padding:

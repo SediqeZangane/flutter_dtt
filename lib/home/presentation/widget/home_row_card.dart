@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dtt/core/constants.dart';
 import 'package:flutter_dtt/core/presentation/card_details_widget.dart';
+import 'package:flutter_dtt/core/presentation/price_widget.dart';
 import 'package:flutter_dtt/home/domain/model/house_model.dart';
-import 'package:intl/intl.dart';
 
 class HomeRowCard extends StatelessWidget {
   final HouseModel houseModel;
@@ -11,9 +11,8 @@ class HomeRowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
-    var formatPrice = myFormat.format(houseModel.price);
-    return Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Row(
         children: [
           Padding(
@@ -36,8 +35,7 @@ class HomeRowCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("\$$formatPrice",
-                      style: Theme.of(context).textTheme.titleMedium),
+                  PriceWidget(price: houseModel.price),
                   Text(houseModel.zip,
                       style: Theme.of(context).textTheme.bodyLarge),
                   Padding(
